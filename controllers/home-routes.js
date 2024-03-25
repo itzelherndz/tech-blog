@@ -17,7 +17,9 @@ router.get('/', async (req, res) => {
             ],
             limit: 15,
             order: [
-                Post, 'createdAt','DESC'
+                Post, 
+                'createdAt',
+                'DESC'
             ],
         });
 
