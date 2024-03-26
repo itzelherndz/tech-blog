@@ -5,21 +5,16 @@ const { User, Post, Comment } = require('../models');
 router.get('/', async (req, res) => {
     try{
         const dbPostData = await Post.findAll({
-            include : [
-                {
-                    model: User,
-                    attributes: ['name']
-                }
-            ],
+            include : [{model: User}],
             limit: 15,
-            order: [Post, 'createdAt','DESC'],
+            order: [ ['createdAt','DESC']]
         });
 
         const posts = dbPostData.map((post) => post.get({plain: true}));
 
         res.render('homepage', {
             posts,
-            // loggedIn: req.session.loggedIn,
+            loggedIn: req.session.loggedIn,
         });
     } catch (err) {
         console.log(err);
@@ -42,9 +37,7 @@ router.get('/posts/:id', async (req, res) => {
                 }
             ],
             order: [
-                Comment, 
-                'createdAt',
-                'DESC'
+                ['createdAt','DESC']
             ],
         });
 
