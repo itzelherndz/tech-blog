@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, Post, Comment } = require('../models');
+const withAuth = require('../utils/auth');
 
 // GET homepage with 15 most recent posts
 router.get('/', async (req, res) => {
@@ -27,14 +28,60 @@ router.get('/posts/:id', async (req, res) => {
     try{
         const dbPostData = await Post.findByPk(req.params.id, {
             include : [{ model: User},{ model: Comment }],
-            order: [
-                ['createdAt','DESC']
-            ],
+            order: [['createdAt','DESC']]
         });
 
         const post = dbPostData.get({plain: true});
         
         res.render('posts', {post,loggedIn: req.session.loggedIn});
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+// GET login page
+router.get('/login', (req,res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    
+    res.render('login');
+});
+
+// GET sign up page
+router.get('/signup', (req,res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    
+    res.render('signup');
+});
+
+// GET users posts page
+router.get('/dahsboard', withAuth, async (req, res) => {
+    try {
+        const dbUserData = await User.findOne({
+            where: {
+                username: req.session.username,
+            }
+        });
+
+        const userId = dbUserData.dataValues.id;
+
+        const dbPostData = await User.findByPk(userId, {
+            include: { model: Post},
+            attributes: { exclude: ['password']}
+        });
+
+        const posts = dbPostData.map((post) => post.get({plain: true}));
+
+        res.render('homepage', {
+            posts,
+            loggedIn: req.session.loggedIn,
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
