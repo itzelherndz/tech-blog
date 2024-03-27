@@ -4,7 +4,7 @@ const { Post, User } = require('../../models');
 // POST posts
 router.post('/', async (req,res) => {
     try {
-        const userId = await User.findOne({
+        const user = await User.findOne({
             where: {
                 username:req.body.username,
             }
@@ -13,10 +13,10 @@ router.post('/', async (req,res) => {
         const dbPostData = await Post.create({
             title: req.body.title,
             content: req.body.content,
-            user_id: userId,
+            user_id: user.id,
         });
 
-        res.json.status(200).json(dbPostData, {message: 'Success! Post has been posted.'});
+        res.status(200).json(dbPostData);
 
     } catch (err) {
         console.log(err);
@@ -34,7 +34,7 @@ router.put('/:id', async (req,res) => {
         });
 
         if (dbPostData){
-            res.status(200).json(dbPostData, { message: 'Success! Post has been updated.'});
+            res.status(200).json(dbPostData);
           } else {
             res.status(404).json([
               {
@@ -52,14 +52,14 @@ router.put('/:id', async (req,res) => {
 // DELETE post
 router.delete('/:id', async (req, res) =>{
     try {
-        const dbPostData = await Post.destroy(req.body, {
+        const dbPostData = await Post.destroy({
             where: {
                 id: req.params.id,
             }
         });
 
         if (dbPostData){
-            res.status(200).json(dbPostData, { message: 'Success! Post has been deleted.'});
+            res.status(200).json(dbPostData);
           } else {
             res.status(404).json([
               {
