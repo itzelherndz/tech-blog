@@ -1,3 +1,12 @@
-<div>
-    <p>TEST TEXT</p>
-</div>
+<main class="container">
+    <div class="grid">
+        {{#each posts  as |post|}}
+        <article>
+            <h3>{{post.title}}</h3>
+            {{!-- fix username join error --}}
+            <h4>{{post.username}}</h4>
+            <p>{{post.content}}</p>
+        </article>
+        {{/each}}
+    </div>
+</main>
