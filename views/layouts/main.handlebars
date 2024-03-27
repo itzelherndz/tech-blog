@@ -13,7 +13,21 @@
         <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet">
     </head>
     <body>
-        <header>TECH BLOG</header>
+        <header class="container">
+            <nav>
+                <h1>Tech Blog</h1>
+                <ul>
+                    <li><a href="/" class="contrast">Home</a></li>
+                    {{#if loggedIn}}
+                    <li><a href="/dashboard" class="contrast">Dashboard</a></li>
+                    <li><a id="logout" class="contrast">Logout</a></li>
+                    {{else}}
+                    <li><a href="/login" class="contrast">Login</a></li>
+                    <li><a href="/signup"class="contrast">Sign Up</a></li>
+                    {{/if}}
+                </ul>
+            </nav>
+        </header>
         {{{body}}}
     </body>
 </html>
