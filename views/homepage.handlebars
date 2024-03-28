@@ -1,9 +1,10 @@
 <main class="container-fluid">
-    <div class="grid">
+    <div>
         {{#each posts  as |post|}}
         <article>
             <h3>{{post.title}}</h3>
             <h4>{{post.user.username}}</h4>
+            <h5>{{post.createdAt}}</h5>
             <p>{{post.content}}</p>
         </article>
         {{/each}}

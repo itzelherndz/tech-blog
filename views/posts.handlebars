@@ -6,11 +6,15 @@
             <h5>{{post.createdAt}}</h5>
             <p>{{post.content}}</p>
         </article>
-        <article class="container-fluid">
-        {{#each comments}}
-            <h3>{{comments.user.username}}</h3>
-            <p>{{comments.content}}</p>
-        {{/each}}
-        </article>
+        <div>
+            <h3>Comments:</h3>
+            {{#each comments as |comment|}}
+            <article class="container-fluid">
+                <h3>{{comment.user.username}}</h3>
+                <h5>{{comment.createdAt}}</h5>
+                <p>{{comment.content}}</p>
+            </article>
+            {{/each}}
+        </div>
     </div>
 </main>
