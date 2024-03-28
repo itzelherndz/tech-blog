@@ -6,7 +6,11 @@ const withAuth = require('../utils/auth');
 router.get('/', async (req, res) => {
     try{
         const dbPostData = await Post.findAll({
-            include : [{model: User}],
+            include : [
+                {
+                    model: User,
+                    attributes: ['username']
+                }],
             limit: 15,
             order: [ ['createdAt','DESC']]
         });
@@ -23,17 +27,35 @@ router.get('/', async (req, res) => {
     }
 });
 
-// GET one post
+// GET one post with comments
 router.get('/posts/:id', async (req, res) => {
     try{
-        const dbPostData = await Post.findByPk(req.params.id, {
-            include : [{ model: User},{ model: Comment }],
-            order: [['createdAt','DESC']]
-        });
+        const dbPostData = await Post.findByPk(req.params.id, 
+            { include : [
+                { 
+                    model: User,
+                    attributes: ['username']
+                },
+            ]}
+        );
 
         const post = dbPostData.get({plain: true});
-        
-        res.render('posts', {post,loggedIn: req.session.loggedIn});
+
+        const dbCommentData = await Comment.findAll({
+            where: {
+                post_id: req.params.id,
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['username']
+                }
+            ]
+        })
+
+        const comments = dbCommentData.map((comment) => comment.get({plain:true}));
+                
+        res.render('posts', {post,comments,loggedIn: req.session.loggedIn});
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
