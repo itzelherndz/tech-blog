@@ -1,0 +1,25 @@
+<main class="container-fluid">
+    <div>
+        <h2>New Post</h2>
+        <form>
+            <fieldset>
+                <input id="new-post-title" name="title" placeholder="Title"/>
+                <textarea id="new-post-content" name="post-content" placeholder="Write your post here..."></textarea>
+                <button type="submit">Post</button> 
+            </fieldset>
+        </form>
+        <br>
+        {{#each posts  as |post|}}
+        <h2>Recent Posts</h2>
+        <article>
+            <h3>{{post.title}}</h3>
+            <h4>{{post.user.username}}</h4>
+            <h5>{{post.createdAt}}</h5>
+            <p>{{post.content}}</p>
+        </article>
+        {{/each}}
+        <article>
+            
+        </article>
+    </div>
+</main>
