@@ -83,7 +83,7 @@ router.get('/signup', (req,res) => {
 });
 
 // GET users posts page
-router.get('/dahsboard', withAuth, async (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
     try {
         const dbUserData = await User.findOne({
             where: {
