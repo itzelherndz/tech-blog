@@ -55,7 +55,12 @@ router.get('/posts/:id', async (req, res) => {
 
         const comments = dbCommentData.map((comment) => comment.get({plain:true}));
                 
-        res.render('posts', {post,comments,loggedIn: req.session.loggedIn});
+        res.render('posts', {
+            post,
+            comments,
+            loggedIn: req.session.loggedIn,
+            user: req.session.username
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
