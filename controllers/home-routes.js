@@ -90,12 +90,15 @@ router.get('/dashboard', withAuth, async (req, res) => {
                 username: req.session.username,
             }
         });
+        
+        console.log(dbUserData);
 
         const userId = dbUserData.dataValues.id;
 
-        const dbPostData = await User.findByPk(userId, {
-            include: { model: Post},
-            attributes: { exclude: ['password']}
+        const dbPostData = await Post.findAll({
+            where: {
+                user_id: userId
+            }
         });
 
         const posts = dbPostData.map((post) => post.get({plain: true}));
