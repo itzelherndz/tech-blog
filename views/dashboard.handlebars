@@ -9,13 +9,14 @@
             </fieldset>
         </form>
         <br>
-        {{#each posts  as |post|}}
         <h2>Recent Posts</h2>
+        {{#each posts  as |post|}}
         <article>
             <h3>{{post.title}}</h3>
             <h4>{{post.user.username}}</h4>
             <h5>{{post.createdAt}}</h5>
             <p>{{post.content}}</p>
+            <button id={{post.id}} type="button">Edit</button>
         </article>
         {{/each}}
         <article>
