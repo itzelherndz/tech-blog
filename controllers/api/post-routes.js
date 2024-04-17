@@ -50,11 +50,11 @@ router.put('/', async (req,res) => {
 });
 
 // DELETE post
-router.delete('/:id', async (req, res) =>{
+router.delete('/', async (req, res) =>{
     try {
         const dbPostData = await Post.destroy({
             where: {
-                id: req.params.id,
+                id: req.session.postId,
             }
         });
 
