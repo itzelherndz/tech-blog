@@ -1,8 +1,8 @@
-const router = requiere('express').Router();
+const router = require('express').Router();
 const { Comment, User, Post } = require('../../models');
 
 // POST comment
-router.post('/:id', async (req, res) => {
+router.post('/', async (req, res) => {
     try{
         const user = await User.findOne({
             where: {
@@ -13,7 +13,7 @@ router.post('/:id', async (req, res) => {
         const dbCommentData = await Comment.create({
             content: req.body.content,
             user_id: user.id,
-            post_id: req.params.id,
+            post_id: req.session.postId,
         });
 
         res.status(200).json(dbCommentData);

@@ -6,7 +6,7 @@
                 <form>
                     <input value={{post.title}} type="text" id="title-{{post.id}}"/>
                     <textarea id="content-{{post.id}}">{{post.content}}</textarea>
-                    <button type="button" id="edit-button">Update</button>
+                    <button type="button" id="update-button">Update</button>
                     <button type="button" id="delete-button">Delete</button>
                 </form>
             </fieldset>
@@ -40,3 +40,6 @@
         </div>
     </div>
 </main>
+{{#if loggedIn}}
+<script src="/js/comment.js"></script>
+{{/if}}
