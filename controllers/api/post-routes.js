@@ -27,6 +27,8 @@ router.post('/', async (req,res) => {
 // PUT post
 router.put('/', async (req,res) => {
     try {
+        console.log('PUT request body', req.body);
+
         const dbPostData = await Post.update(req.body, {
             where: {
                 id: req.session.postId,
@@ -52,6 +54,8 @@ router.put('/', async (req,res) => {
 // DELETE post
 router.delete('/', async (req, res) =>{
     try {
+        console.log('DELETE req session id', req.session.postId);
+
         const dbPostData = await Post.destroy({
             where: {
                 id: req.session.postId,
