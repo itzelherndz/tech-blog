@@ -13,7 +13,7 @@
             {{else}}
                 <h2>{{post.title}}</h2>
                 <h4>{{post.user.username}}</h4>
-                <h5>{{post.createdAt}}</h5>
+                <h5>{{format_date post.createdAt}}</h5>
                 <p>{{post.content}}</p>
             {{/if}}
         </article>
@@ -33,7 +33,7 @@
             {{#each comments as |comment|}}
             <article class="container-fluid">
                 <h3>{{comment.user.username}}</h3>
-                <h5>{{comment.createdAt}}</h5>
+                <h5>{{format_date comment.createdAt}}</h5>
                 <p>{{comment.content}}</p>
             </article>
             {{/each}}

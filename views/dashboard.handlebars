@@ -14,7 +14,7 @@
         <article>
             <a href="/posts/{{post.id}}"><h3>{{post.title}}</h3></a>
             <h4>{{post.user.username}}</h4>
-            <h5>{{post.createdAt}}</h5>
+            <h5>{{format_date post.createdAt}}</h5>
             <p>{{post.content}}</p>
         </article>
         {{/each}}
