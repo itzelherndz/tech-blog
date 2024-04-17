@@ -4,8 +4,8 @@
             {{#if (compare post.user.username user)  }}
             <fieldset>
                 <form>
-                    <input value={{post.title}} type="text" id="title-{{post.id}}"/>
-                    <textarea id="content-{{post.id}}">{{post.content}}</textarea>
+                    <input value={{post.title}} type="text" id="title"/>
+                    <textarea id="content">{{post.content}}</textarea>
                     <button type="button" id="update-button">Update</button>
                     <button type="button" id="delete-button">Delete</button>
                 </form>
