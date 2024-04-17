@@ -25,11 +25,11 @@ router.post('/', async (req,res) => {
 });
 
 // PUT post
-router.put('/:id', async (req,res) => {
+router.put('/', async (req,res) => {
     try {
         const dbPostData = await Post.update(req.body, {
             where: {
-                id: req.params.id,
+                id: req.session.postId,
             }
         });
 
