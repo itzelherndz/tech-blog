@@ -1,7 +1,9 @@
 const deleteForm = async (event) => {
     event.preventDefault();
 
-    const apiResponse = await fetch ('/api/posts/', {
+    const postId = window.location.pathname.split('/').pop();
+
+    const apiResponse = await fetch (`/api/posts/${postId}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
     });

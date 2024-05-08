@@ -4,7 +4,9 @@ const updateForm = async (event) => {
     const title = document.getElementById('update-title').value.trim();
     const content = document.getElementById('update-content').value;
 
-    const apiResponse = await fetch ('/api/posts/', {
+    const postId = window.location.pathname.split('/').pop();
+
+    const apiResponse = await fetch (`/api/posts/${postId}`, {
         method: 'PUT',
         body: JSON.stringify({title: title, content: content}),
         headers: { 'Content-Type': 'application/json' },
