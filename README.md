@@ -1,6 +1,6 @@
 # Tech Blog
 
-## [Deployed Application](https://new-tech-blog-ih-53c2f8ce1cbe.herokuapp.com/)
+## [Deployed Application Link](https://tech-blog-ih-455218ad555e.herokuapp.com/)
 
 ## Description
 
